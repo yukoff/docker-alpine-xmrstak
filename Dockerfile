@@ -1,9 +1,10 @@
-FROM alpine:latest
+FROM alpine:edge
 COPY donate-level.patch /tmp/
 COPY start.sh /xmr-stak/
 COPY config.txt.tpl /xmr-stak/
 RUN adduser -S -D -H -h /xmr-stak miner
 RUN apk --no-cache upgrade && \
+    apk --no-cache add hwloc hwloc-dev --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing/ && \
     apk --no-cache add \
       git \
       cmake \
@@ -22,7 +23,7 @@ RUN apk --no-cache upgrade && \
             -DMICROHTTPD_ENABLE=OFF \
             -DCUDA_ENABLE=OFF \
             -DOpenCL_ENABLE=OFF \
-            -DHWLOC_ENABLE=OFF \
+            -DHWLOC_ENABLE=ON \
             .. && \
       make install && \
     cd /xmr-stak && \
@@ -30,10 +31,11 @@ RUN apk --no-cache upgrade && \
     apk del \
       build-base \
       openssl-dev \
+      hwloc-dev \
       g++ \
       cmake \
       git
 USER miner
 WORKDIR /xmr-stak
-ENTRYPOINT ["/xmr-stak/start.sh"]
+#ENTRYPOINT ["/xmr-stak/start.sh"]
 #CMD ["pool_url", "wallet", "password", "workers"]
