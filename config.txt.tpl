@@ -1,0 +1,30 @@
+"use_slow_memory" : "warn",
+"aes_override" : null,
+"tls_secure_algo" : true,
+"call_timeout" : 10,
+"retry_time" : 10,
+"giveup_limit" : 0,
+"verbose_level" : 3,
+"print_motd" : true,
+"h_print_time" : 60,
+"daemon_mode" : false,
+"flush_stdout" : false,
+"output_file" : "",
+"httpd_port" : 0,
+"http_login" : "",
+"http_pass" : "",
+"prefer_ipv4" : true,
+
+"currency" : "monero", // 'monero' or 'aeon'
+"pool_list" :
+[
+  {
+    "pool_address"    : "${POOL}",
+    "wallet_address"  : "${WALLET}",
+    "pool_password"   : "${PASSWORD}",
+    "use_nicehash"    : false,
+    "use_tls"         : false,
+    "tls_fingerprint" : "",
+    "pool_weight"     : 10,
+  },
+],
